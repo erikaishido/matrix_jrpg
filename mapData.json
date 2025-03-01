@@ -1,0 +1,20 @@
+{
+    "map001": {
+        "name": "town",
+        "dimensions": [6,5],
+        "playerSpawnCoords": [0,0],
+        "warpzones": [
+            ["map002", [3,2]]
+        ],
+        "npcs": [
+            ["npc001", [4,0]],
+            ["npc002", [5,3]],
+            ["npc003", [2,4]]
+        ]
+    },
+    "map002": {
+        "name": "woods",
+        "dimension:": [7,6],
+        "playerStartCoords": [0,0]
+    }
+}

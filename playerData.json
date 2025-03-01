@@ -1,0 +1,16 @@
+{
+    "general": {
+        "level": 1,
+        "exp": 0
+    },
+    "combat": {
+        "hp": 120,
+        "mp": 50,
+        "atk": 12,
+        "def": 21,
+        "spd": 15
+    },
+    "inventory": {
+        
+    }
+}

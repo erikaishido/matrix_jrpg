@@ -1,0 +1,14 @@
+{
+    "npc001": {
+        "name": "town guy",
+        "dialogue": "hi!\nthis is a town in case you couldn't guess from the visuals."
+    },
+    "npc002": {
+        "name": "jayo",
+        "dialogue": "the weather is nice today!\nsurely i don't need a jacket."
+    },
+    "npc003": {
+        "name": "cat",
+        "dialogue": "meow meow meow.\nmeow!\nmeow mrrrrarp."
+    }
+}
