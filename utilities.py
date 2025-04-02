@@ -1,5 +1,10 @@
+import os
+import platform
 
-
+clearType = "clear"
+if (platform.system() == "Windows"):
+    clearType = "cls"
+clearScreen = lambda: os.system(clearType)
 
 def sum_coords(arg1, arg2):
     xsum = arg1[0] + arg2[0]

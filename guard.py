@@ -1,3 +1,4 @@
+import utilities
 
 # ref: https://deviq.com/design-patterns/guard-clause
 
@@ -11,7 +12,8 @@ def against_matrix_out_of_bounds(newCoords, matrixSize):
 # only used in states to filter out invalid input
 def against_invalid_key_input(input, validKeys):
     if input not in validKeys:
-        print("invalid input. try again.")
+        utilities.clearScreen()
+        print(f"input {input} is invalid. try again.")
         return False
     return True
 

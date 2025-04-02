@@ -1,4 +1,5 @@
 import guard
+import utilities
 
 class State:
     def __init__(self):
@@ -21,6 +22,7 @@ class MapState(State):
         self.validKeys = self.moveKeys.union(self.interactKeys, self.menuKeys)
 
     def enter(self):
+        utilities.clearScreen()
         print("enter map")
 
     def handle_input(self):
@@ -29,8 +31,10 @@ class MapState(State):
             if userInput in self.menuKeys:
                 return "menu"
             elif userInput in self.moveKeys:
+                utilities.clearScreen()
                 self.game.move_player(userInput)
             elif userInput in self.interactKeys:
+                utilities.clearScreen()
                 self.game.player_interact()
         
     def draw(self):
@@ -59,4 +63,5 @@ class MenuState(State):
                 self.game.select_menu()
     
     def draw(self):
+        utilities.clearScreen()
         self.game.draw_menu()

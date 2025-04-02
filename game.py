@@ -124,4 +124,5 @@ def main():
         game.draw()
 
 if __name__ == '__main__':
-	main()
+    utilities.clearScreen()
+    main()
