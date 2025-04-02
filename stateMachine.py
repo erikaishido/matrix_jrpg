@@ -20,6 +20,9 @@ class StateMachine:
         if newState != None:
             self.state = self.keyToState[newState]
             self.state.enter()
+    
+    def update(self):
+        pass
 
     # when a state change happens outside of gamestate
     def set_state(self, newState):

@@ -47,11 +47,6 @@ class Game:
         map = tileMap.TileMap(mapData)
         return map
     
-# -----------------------input--------------------------
-
-    def handle_input(self):
-        self.stateMachine.handle_input()
-
 # -----------------------statemachine functions--------------------------
 
     def set_state(self, newState):
@@ -99,13 +94,14 @@ class Game:
         self.menu.iterate(input)
     def select_menu(self):
         self.menu.select()
-        
-# -----------------------update--------------------------
 
+# -----------------------game loop--------------------------
+
+    def handle_input(self):
+        self.stateMachine.handle_input()
+        
     def update(self):
         self.map.update()
-
-# -----------------------draw--------------------------
 
     def draw(self):
         self.stateMachine.draw()

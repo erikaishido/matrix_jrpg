@@ -36,6 +36,9 @@ class MapState(State):
             elif userInput in self.interactKeys:
                 utilities.clearScreen()
                 self.game.player_interact()
+    
+    def update(self):
+        pass
         
     def draw(self):
         self.game.draw_map()
@@ -61,6 +64,9 @@ class MenuState(State):
                 self.game.iterate_menu(userInput)
             elif userInput in self.selectKey:
                 self.game.select_menu()
+    
+    def update(self):
+        pass
     
     def draw(self):
         utilities.clearScreen()
