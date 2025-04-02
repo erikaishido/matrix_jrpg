@@ -12,7 +12,8 @@ class State:
         pass
     def draw(self):
         pass
-        
+
+# -----------------------------------------------------------------------------------
 
 class MapState(State):
     def __init__(self):
@@ -38,10 +39,16 @@ class MapState(State):
                 self.game.player_interact()
     
     def update(self):
-        pass
+        self.map.update()
         
     def draw(self):
         self.game.draw_map()
+
+    # setters/getters
+    def set_map_ref(self, map):
+        self.map = map
+
+# -----------------------------------------------------------------------------------
 
 class MenuState(State):
     def __init__(self):

@@ -24,6 +24,7 @@ class Game:
         # set up others
         self.stateMachine = stateMachine.StateMachine()
         self.stateMachine.set_game_ref(self)
+        self.stateMachine.set_map_ref(self.map)
         # draw map to start
         self.draw_map()
 
@@ -95,20 +96,23 @@ class Game:
     def select_menu(self):
         self.menu.select()
 
+# -----------------------draw functions--------------------------
+
+    def draw_map(self):
+        self.map.draw()
+    def draw_menu(self):
+        self.menu.draw()
+
 # -----------------------game loop--------------------------
 
     def handle_input(self):
         self.stateMachine.handle_input()
         
     def update(self):
-        self.map.update()
+        self.stateMachine.update()
 
     def draw(self):
         self.stateMachine.draw()
-    def draw_map(self):
-        self.map.draw()
-    def draw_menu(self):
-        self.menu.draw()
     
 # -----------------------main--------------------------
 
