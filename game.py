@@ -24,7 +24,6 @@ class Game:
         # set up others
         self.stateMachine = stateMachine.StateMachine()
         self.stateMachine.set_game_ref(self)
-        self.stateMachine.set_map_ref(self.map)
         # draw map to start
         self.draw_map()
 
@@ -50,10 +49,10 @@ class Game:
     
 # -----------------------statemachine functions--------------------------
 
-    def set_state(self, newState):
-        self.stateMachine.set_state(newState)
+    #def set_state(self, newState):
+    #    self.stateMachine.set_state(newState)
 
-# -----------------------player move/interact--------------------------
+# -----------------------tilemap functions--------------------------
 
     def move_player(self, key):
         keyToCoords = {
@@ -70,6 +69,7 @@ class Game:
                 print("there is something blocking your path...")
             else:
                 self.player.set_coords(newCoords)
+                self.map.update()
 
     def player_interact(self):
         modifiers = [[-1,0], [0,-1], [1,0], [0,1]]
@@ -86,6 +86,9 @@ class Game:
         adjacent = matrix[coords[0]][coords[1]]
         if adjacent != 0:
             return adjacent
+    
+    def draw_map(self):
+        self.map.draw()
         
 # -----------------------menu functions--------------------------
 
@@ -95,11 +98,6 @@ class Game:
         self.menu.iterate(input)
     def select_menu(self):
         self.menu.select()
-
-# -----------------------draw functions--------------------------
-
-    def draw_map(self):
-        self.map.draw()
     def draw_menu(self):
         self.menu.draw()
 

@@ -2,16 +2,14 @@ import guard
 import utilities
 
 class State:
-    def __init__(self):
-        pass
+    def enter(self):
+        print("entering " + self.name)
+    def exit(self):
+        self.newState = None
     def set_game_ref(self, game):
         self.game = game
-    def enter(self):
-        pass
-    def handle_input(self):
-        pass
-    def draw(self):
-        pass
+    def get_new_state(self):
+        return self.newState
 
 # -----------------------------------------------------------------------------------
 
@@ -21,32 +19,29 @@ class MapState(State):
         self.interactKeys = {"x"}
         self.menuKeys = {"m"}
         self.validKeys = self.moveKeys.union(self.interactKeys, self.menuKeys)
-
-    def enter(self):
-        utilities.clearScreen()
-        print("enter map")
-
+        self.name = "map"
+        self.command = None
+        self.newState = None
+    
     def handle_input(self):
         userInput = input("\nwasd to move: ")
         if guard.against_invalid_key_input(userInput, self.validKeys) == True:
-            if userInput in self.menuKeys:
-                return "menu"
-            elif userInput in self.moveKeys:
-                utilities.clearScreen()
-                self.game.move_player(userInput)
-            elif userInput in self.interactKeys:
-                utilities.clearScreen()
-                self.game.player_interact()
+            self.command = userInput
     
     def update(self):
-        self.map.update()
-        
+        if self.command != None:
+            if self.command in self.menuKeys:
+                self.newState = "menu"
+            elif self.command in self.moveKeys:
+                utilities.clearScreen()
+                self.game.move_player(self.command)
+            elif self.command in self.interactKeys:
+                utilities.clearScreen()
+                self.game.player_interact()
+            self.command = None
+
     def draw(self):
         self.game.draw_map()
-
-    # setters/getters
-    def set_map_ref(self, map):
-        self.map = map
 
 # -----------------------------------------------------------------------------------
 
@@ -56,24 +51,25 @@ class MenuState(State):
         self.selectKey = {"x"}
         self.exitKey = {"m"}
         self.validKeys = self.upDownKeys.union(self.selectKey, self.exitKey)
-
-    def enter(self):
-        #print("enter menu")
-        pass
+        self.name = "menu"
+        self.command = None
+        self.newState = None
 
     def handle_input(self):
         userInput = input("\nws to navigate menu, x to select: ")
         if guard.against_invalid_key_input(userInput, self.validKeys) == True:
-            if userInput in self.exitKey:
-                self.game.exit_menu()
-                #return "map"
-            elif userInput in self.upDownKeys:
-                self.game.iterate_menu(userInput)
-            elif userInput in self.selectKey:
-                self.game.select_menu()
+            self.command = userInput
     
     def update(self):
-        pass
+        if self.command != None:
+            if self.command in self.exitKey:
+                self.game.exit_menu()
+                self.newState = "map"
+            elif self.command in self.upDownKeys:
+                self.game.iterate_menu(self.command)
+            elif self.command in self.selectKey:
+                self.game.select_menu()
+            self.command = None
     
     def draw(self):
         utilities.clearScreen()

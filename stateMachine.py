@@ -14,13 +14,16 @@ class StateMachine:
 # -----------------------game loop--------------------------
 
     def handle_input(self):
-        newState = self.state.handle_input()
-        if newState != None:
-            self.state = self.keyToState[newState]
-            self.state.enter()
+        self.state.handle_input()
     
     def update(self):
         self.state.update()
+        # check for new state
+        newState = self.state.get_new_state()
+        if newState != None:
+            self.state.exit()
+            self.state = self.keyToState[newState]
+            self.state.enter()
 
     def draw(self):
         self.state.draw()
@@ -31,9 +34,6 @@ class StateMachine:
         for state in self.keyToState.values():
             state.set_game_ref(game)
     
-    def set_map_ref(self, map):
-        self.mapState.set_map_ref(map)
-
     # when a state change happens outside of gamestate
     def set_state(self, newState):
         self.state = self.keyToState[newState]

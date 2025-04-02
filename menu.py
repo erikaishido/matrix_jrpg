@@ -21,7 +21,6 @@ class Menu:
 
     def exit(self):
         if self.submenu == None:
-            self.game.set_state("map")
             self.currentIndex = 0
         else:
             self.submenu = None
